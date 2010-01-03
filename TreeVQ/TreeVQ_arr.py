@@ -3,7 +3,7 @@
 # Implements a Tree vector quantiser
 # Copyright (c) 2006 Ray Heasman
 from Vector import Vector
-import Numeric
+import numpy.oldnumeric as Numeric
 
 class VQNode(object):
   """Implements a single node in the VW tree"""

@@ -1,6 +1,7 @@
 # Used to figure out how arrays work so we can use them in TreeVQ
 
-import Numeric, pygame
+import pygame
+import numpy.oldnumeric as Numeric
 
 cardSurf = pygame.Surface((3, 2))
 a1 = pygame.surfarray.array3d(cardSurf)

@@ -2,7 +2,8 @@
 import psyco
 psyco.full()
 
-import pygame, random, sys, time, Numeric
+import pygame, random, sys, time
+import numpy.oldnumeric as Numeric
 import pygame.surfarray as surfarray
 import TreeVQ
 
