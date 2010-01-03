@@ -4,14 +4,8 @@ from pywinauto.application import Application
 import PIL
 from time import sleep
 
-app = Application()
-fw = pywinauto.findwindows
-find_win = fw.find_window
-app.connect_(title_re = '.* NL Hold.em')
-win = app.window_(handle = find_win(title_re = '.*NL Hold.em'))
-
 class Table(object):
-  def __init__(self, table_name, game_type = "NL Hold'em"):
+  def __init__(self, table_name, game_type = "NL Hold'em", width = 640, height = 482):
     self.name = table_name
     self.game_type = game_type
     self.app = Application()
@@ -23,13 +17,16 @@ class Table(object):
     self.chat_handle = self.GetChatHandle()
     self.chat_text = []
     self.GetChatText()
+    self.width = 640
+    self.height = 482
+    
 
     self.lines_processed = len(self.chat_text)
     self.table_cards = []
 
   def GetChatParentHandle(self):
     for handle in findwindows.find_windows(process = self.app.process):
-      texts = app.window_(handle = handle).GetProperties()['Texts'][0]
+      texts = self.app.window_(handle = handle).GetProperties()['Texts'][0]
       if (    ("UB" not in texts)
           and (self.name in texts)
           and ("NL" not in texts)):
@@ -45,14 +42,14 @@ class Table(object):
         return child_win.handle  
 
   def GetChatText(self):
-    self.chat_text = app.window_(handle = self.chat_handle).GetProperties()['Texts'][0].split('\r\n')
+    self.chat_text = self.app.window_(handle = self.chat_handle).GetProperties()['Texts'][0].split('\r\n')
 
   def CaptureWindow(self, filename = 'd:/pokerbot/image.bmp'):
-    image = app.window_(handle = self.table_handle).CaptureAsImage()
+    image = self.app.window_(handle = self.table_handle).CaptureAsImage()
     image.save(filename)
 
   def TimedCapture(self, total_images, timed_interval, filename = 'd:/pokerbot/screens/image.bmp'):
-    win = app.window_(handle = self.table_handle)
+    win = self.app.window_(handle = self.table_handle)
     for i in xrange(total_images):
       save_file = filename.rsplit('.',2)
       save_file = save_file[0] + str(i) + '.' + save_file[1]
@@ -62,7 +59,6 @@ class Table(object):
   def ProcessLines(self):
     self.GetChatText()
     while (self.lines_processed < len(self.chat_text)):
-      print self.lines_processed
       self.ProcessLine(self.chat_text[self.lines_processed])
       self.lines_processed += 1
 
@@ -74,9 +70,12 @@ class Table(object):
       cards = line.rsplit('[',2)[1].rsplit(']',2)[0].split(' ')
       for card in cards:
         self.table_cards.append(card)
-      self.CaptureWindow('d:/pokerbot/screen3/' + ''.join(self.table_cards) + '.bmp')
+      self.CaptureWindow('d:/pokerbot/screen4/' + ''.join(self.table_cards) + '.bmp')
     elif 'HOLE CARDS' in line:
       self.table_cards = []
+      print 'new hand'
+
+  
 
   def ProcessLine(self, line):
     if 'DEALING' in line:
