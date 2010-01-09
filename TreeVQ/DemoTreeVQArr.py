@@ -36,7 +36,6 @@ def printCard(Card, screen, (xpos, ypos)):
 
 def printVQNodes(VQ, screen):
   NL = VQ.getNodeList()
-  # print NL
   x = 0
   y = 0
   cnt = 0
@@ -57,9 +56,8 @@ if __name__ == "__main__":
   size = (w*2, h*3)
   screen  = pygame.display.set_mode(size, 0, 32)
   arr = surfarray.array3d(screen)
-  # screen.blit(CardsSurf, [0,0])
+
   Cards = []
-  CardList = range(52)
 
   for i in range(52):
     c = cutCard(CardsArr, i).copy()
