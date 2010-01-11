@@ -49,8 +49,7 @@ def getCards(path = '..\\cards\\*.bmp'):
 
 def cardsToArray(cards):
   Cards = []
-  sorted_keys = 
-  for key in cards.keys.sort():
+  for key in cards.keys():
     Cards.append(cards[key])
   return Cards
 
