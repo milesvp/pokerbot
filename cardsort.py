@@ -17,9 +17,9 @@ def sortrank(a,b):
     return 1
   if b[:-1] == 'J':
     return -1
-  if a[:-1] == '10':
+  if a[:-1] == 'T':
     return 1
-  if b[:-1] == '10':
+  if b[:-1] == 'T':
     return -1
   if a[:-1] > b[:-1]:
     return 1
