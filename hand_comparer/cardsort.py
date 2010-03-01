@@ -32,10 +32,10 @@ def SortRank(a,b):
 
 def SortSuit(a,b):
   """Suits don't really have values, this is just to prettify things.
+     Also sorts by rank if tied.
      takes 2 cards (Rank,Suit),
      returns 1 if first is higher,
-     returns -1 if second is higher,
-     retursn 0 if tied"""
+     returns -1 if second is higher"""
   if a[-1] == b[-1]:
     return sortrank(a,b)
   if a[-1] == 'h':
