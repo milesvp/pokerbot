@@ -1,4 +1,4 @@
-def sortrank(a,b):
+def SortRank(a,b):
   """takes 2 cards (Rank,Suit), and
      returns 1 if first is higher,
      returns -1 if second is higher,
@@ -30,7 +30,7 @@ def sortrank(a,b):
   if a[:-1] < b[:-1]:
     return -1
 
-def sortsuits(a,b):
+def SortSuit(a,b):
   """Suits don't really have values, this is just to prettify things.
      takes 2 cards (Rank,Suit),
      returns 1 if first is higher,
